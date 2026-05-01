@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/game.dart';
 import '../providers/download_provider.dart';
+import '../providers/owned_provider.dart';
 import 'buy_screen.dart';
 
 class GameDetailScreen extends StatelessWidget {
@@ -10,6 +11,9 @@ class GameDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ownedProvider = Provider.of<OwnedProvider>(context);
+    final isOwned = ownedProvider.isOwned(game.id);
+
     return Scaffold(
       appBar: AppBar(title: Text(game.title)),
       body: SingleChildScrollView(
@@ -41,8 +45,28 @@ class GameDetailScreen extends StatelessWidget {
             const SizedBox(height: 30),
             SizedBox(
               width: double.infinity,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.green, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 14)),
+              child: isOwned
+                  ? ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.grey,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                ),
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('This game is already in your Library. You can find it under the Library tab.')),
+                  );
+                  Navigator.pop(context);
+                },
+                child: const Text("VIEW IN LIBRARY"),
+              )
+                  :
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                ),
                 onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => BuyScreen(game: game))),
                 child: const Text("BUY NOW"),
               ),

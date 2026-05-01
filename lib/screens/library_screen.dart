@@ -58,7 +58,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
             itemCount: ownedGames.length,
             itemBuilder: (context, index) {
               final game = ownedGames[index];
-              final isDownloaded = downloadProvider.downloadedGames.contains(game);
+              final isDownloaded = downloadProvider.isDownloaded(game);
               return Card(
                 margin: const EdgeInsets.all(8),
                 child: ListTile(

@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import '../providers/theme_provider.dart';
 import '../providers/profile_provider.dart';
 import 'profile_screen.dart';
-import 'beta_screen.dart'; //
+import 'beta_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -54,12 +54,12 @@ class SettingsScreen extends StatelessWidget {
           leading: const Icon(Icons.code, color: Colors.blue),
           title: const Text('Beta Features'),
           trailing: const Icon(Icons.chevron_right),
-          // onTap: () {
-          //   Navigator.push(
-          //     context,
-          //     MaterialPageRoute(builder: (_) => const BetaScreen()),
-          //   );
-          // },
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const BetaScreen()),
+            );
+          },
         ),
       ],
     );

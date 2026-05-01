@@ -36,7 +36,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 children: const [
                   Text(
                     'NovaPlay Terms & Conditions',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16),
                   ),
                   SizedBox(height: 12),
                   Text(
@@ -138,7 +138,8 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               const SizedBox(height: 20),
               Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Checkbox(
                     value: _isChecked,
@@ -151,8 +152,14 @@ class _SignupScreenState extends State<SignupScreen> {
                       onTap: _showTermsDialog,
                       child: const Text(
                         'I have read and agree to the Terms & Conditions',
-                      ),
+                          style: const TextStyle(
+                            color: Colors.blue,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            decoration: TextDecoration.underline,
+                          )
                     ),
+                  ),
                   ),
                 ],
               ),
